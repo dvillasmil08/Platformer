@@ -1,6 +1,7 @@
 function love.load()
     wf = require 'Libraries/windfield'
     world = wf.newWorld(0, 800, false)
+    world:setQueryDebugDrawing(true)
 
     world:addCollisionClass('Platform')
     world:addCollisionClass('Player'--[[, {ignores = {'Platform'}}]])
@@ -45,5 +46,11 @@ function love.keypressed(key)
     -- Could change up arrow to W
     if key == 'up' then
         player:applyLinearImpulse(0, -7000)
+    end
+end
+
+function love.mousepressed(x, y, button)
+    if button == 1 then
+        local colliders = world:queryCircleArea(x, y, 200)
     end
 end
