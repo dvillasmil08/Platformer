@@ -19,13 +19,7 @@ function love.load()
     world:addCollisionClass('Player'--[[, {ignores = {'Platform'}}]])
     world:addCollisionClass('Danger')
 
-    player = world:newRectangleCollider(360, 100, 50, 66, {collision_class = "Player"})
-    player:setFixedRotation(true)
-    player.speed = 240
-    player.animation = animations.idle
-    player.isMoving = false
-    player.direction = 1
-    player.grounded = true
+    require('Player')
 
     platform = world:newRectangleCollider(250, 400,  300, 100,  {collision_class = "Platform"})
     platform:setType('static')
@@ -36,52 +30,12 @@ end
 
 function love.update(dt)
     world:update(dt)
-
-    player.isMoving = false
-    if player.body then
-        local colliders = world:queryRectangleArea(player:getX() - 25, player:getY() + 33, 33, 2, {'Platform'})
-        if #colliders > 0 then
-            player.grounded = true
-        else
-            player.grounded = false
-        end
-
-        local px, py = player:getPosition()
-        -- could change right arrow to D
-        if love.keyboard.isDown('right') then
-            player:setX(px + player.speed*dt)
-            player.isMoving = true
-            player.direction = 1
-        end
-        -- could change right arrow to A
-        if love.keyboard.isDown('left') then
-            player:setX(px - player.speed*dt)
-            player.isMoving = true
-            player.direction = -1
-        end
-        
-        if player:enter('Danger') then
-            player:destroy()    
-        end
-    end
-
-    if player.grounded then
-        if player.isMoving then
-            player.animation = animations.run
-        else
-            player.animation = animations.idle
-        end 
-    else
-        player.animation = animations.jump
-    end
-    player.animation:update(dt)
+    playerUpdate(dt)
 end
 
 function love.draw()
     world:draw()
-
-    local px, py = player:getPosition()
-    player.animation:draw(sprites.playerSheet, px, py, nil, 1 * player.direction, 1, 46, 62)
+    drawPlayer()
 end
 
 function love.keypressed(key)
