@@ -34,7 +34,7 @@ end
 
 function love.update(dt)
     world:update(dt)
-
+    player.isMoving = false
     if player.body then
         local px, py = player:getPosition()
         -- could change right arrow to D
@@ -53,8 +53,10 @@ function love.update(dt)
         end
     end
 
-    if player.isMoving == true then
+    if player.isMoving then
         player.animation = animations.run
+    else
+        player.animation = animations.idle
     end 
     player.animation:update(dt)
 end
