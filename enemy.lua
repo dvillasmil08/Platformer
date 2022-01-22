@@ -9,9 +9,12 @@ end
 
 function updateEnemies(dt)
     for i,e in ipairs(enemies) do
-        local ex, ey, = e:getPosition()
+        local ex, ey = e:getPosition()
 
         local colliders = world:queryRectangleArea(ex + (40 * e.direction), ey + 40, 10, 10, {'Platform'})
+        if #colliders == 0 then
+            e.direction = e.direction * -1
+        end
 
         e:setX(ex + e.speed * dt * e.direction)
     end
