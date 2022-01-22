@@ -7,6 +7,7 @@ function love.load()
     world:addCollisionClass('Danger')
 
     player = world:newRectangleCollider(360, 100, 80, 80, {collision_class = "Player"})
+    player:setFixedRotation(true)
     player.speed = 240
 
     platform = world:newRectangleCollider(250, 400,  300, 100,  {collision_class = "Platform"})
@@ -27,6 +28,10 @@ function love.update(dt)
     -- could change right arrow to A
     if love.keyboard.isDown('left') then
         player:setX(px - player.speed*dt)
+    end
+    
+    if player:enter('Danger') then
+        player:destroy()    
     end
 end
 
