@@ -45,13 +45,16 @@ end
 function love.keypressed(key)
     -- Could change up arrow to W
     if key == 'up' then
-        player:applyLinearImpulse(0, -7000)
+        local colliders = world:queryRectangleArea(player:getX() - 40, player:getY() + 40, 80, 2, {'Platform'})
+        if #colliders > 0 then
+            player:applyLinearImpulse(0, -7000)
+        end
     end
 end
 
 function love.mousepressed(x, y, button)
     if button == 1 then
-        local colliders = world:queryCircleArea(x, y, 200)
+        local colliders = world:queryCircleArea(x, y, 200, {'Platform', 'Danger'})
         for i,c in ipairs(colliders) do
             c:destroy()
         end
