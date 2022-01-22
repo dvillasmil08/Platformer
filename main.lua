@@ -20,18 +20,20 @@ end
 function love.update(dt)
     world:update(dt)
 
-    local px, py = player:getPosition()
-    -- could change right arrow to D
-    if love.keyboard.isDown('right') then
-        player:setX(px + player.speed*dt)
-    end
-    -- could change right arrow to A
-    if love.keyboard.isDown('left') then
-        player:setX(px - player.speed*dt)
-    end
-    
-    if player:enter('Danger') then
-        player:destroy()    
+    if player.body then
+        local px, py = player:getPosition()
+        -- could change right arrow to D
+        if love.keyboard.isDown('right') then
+            player:setX(px + player.speed*dt)
+        end
+        -- could change right arrow to A
+        if love.keyboard.isDown('left') then
+            player:setX(px - player.speed*dt)
+        end
+        
+        if player:enter('Danger') then
+            player:destroy()    
+        end
     end
 end
 
