@@ -41,7 +41,9 @@ function love.update(dt)
     playerUpdate(dt)
 
     local px, py = player:getPosition()
-    cam:lookAt(px, py)
+    -- If you DONT want the camera to Y position static
+    -- Change bellow code to: cam:lookAt(px, py)
+    cam:lookAt(px, love.graphics.getHeight()/2)
 end
 
 function love.draw()
@@ -80,7 +82,7 @@ end
 
 function loadMap()
     gameMap = sti("maps/levelOne.lua")
-    for i, obj in pairs(gameMap.layers["platform"].objects) do
+    for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
     end
 end
