@@ -1,5 +1,17 @@
 function love.load()
-    wf = require 'Libraries/windfield'
+    anim8 = require 'libraries/anim8/anim8'
+ 
+    sprites = {}
+    sprites.playerSheet = love.graphics.newImage('sprites/TileSheet/gameboy.png')
+
+    local grid = anim8.newGrid(96, 96, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
+
+    animations = {}
+    animations.idle = anim8.newAnimation(grid('1-1',1), 1)
+    animations.jump = anim8.newAnimation(grid('2-2',1), 1)
+    animations.run = anim8.newAnimation(grid('3-4',1), 0.3)
+
+    wf = require 'libraries/windfield'
     world = wf.newWorld(0, 800, false)
     world:setQueryDebugDrawing(true)
 
@@ -7,9 +19,10 @@ function love.load()
     world:addCollisionClass('Player'--[[, {ignores = {'Platform'}}]])
     world:addCollisionClass('Danger')
 
-    player = world:newRectangleCollider(360, 100, 80, 80, {collision_class = "Player"})
+    player = world:newRectangleCollider(360, 100, 50, 40, {collision_class = "Player"})
     player:setFixedRotation(true)
     player.speed = 240
+    player.animation = animations.idle
 
     platform = world:newRectangleCollider(250, 400,  300, 100,  {collision_class = "Platform"})
     platform:setType('static')
@@ -36,16 +49,21 @@ function love.update(dt)
             player:destroy()    
         end
     end
+
+    player.animation:update(dt)
 end
 
 function love.draw()
     world:draw()
+
+    local px, py = player:getPosition()
+    player.animation:draw(sprites.playerSheet, px, py, nil, nil, nil, 46, 75)
 end
 
 function love.keypressed(key)
     -- Could change up arrow to W
     if key == 'up' then
-        local colliders = world:queryRectangleArea(player:getX() - 40, player:getY() + 40, 80, 2, {'Platform'})
+        local colliders = world:queryRectangleArea(player:getX() - 20, player:getY() + 20, 40, 2, {'Platform'})
         if #colliders > 0 then
             player:applyLinearImpulse(0, -7000)
         end
