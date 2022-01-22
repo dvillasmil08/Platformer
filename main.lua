@@ -1,6 +1,6 @@
 function love.load()
     wf = require 'Libraries/windfield'
-    world = wf.newWorld(0, 800)
+    world = wf.newWorld(0, 800, false)
 
     world:addCollisionClass('Platform')
     world:addCollisionClass('Player'--[[, {ignores = {'Platform'}}]])
