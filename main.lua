@@ -40,8 +40,8 @@ function love.update(dt)
 end
 
 function love.draw()
-    world:draw()
     gameMap:drawLayer(gameMap.layers["Base"])
+    world:draw()
     drawPlayer()
 end
 
