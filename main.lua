@@ -24,6 +24,7 @@ function love.load()
     player.speed = 240
     player.animation = animations.idle
     player.isMoving = false
+    player.direction = 1
 
     platform = world:newRectangleCollider(250, 400,  300, 100,  {collision_class = "Platform"})
     platform:setType('static')
@@ -41,11 +42,13 @@ function love.update(dt)
         if love.keyboard.isDown('right') then
             player:setX(px + player.speed*dt)
             player.isMoving = true
+            player.direction = 1
         end
         -- could change right arrow to A
         if love.keyboard.isDown('left') then
             player:setX(px - player.speed*dt)
             player.isMoving = true
+            player.direction = -1
         end
         
         if player:enter('Danger') then
@@ -65,7 +68,7 @@ function love.draw()
     world:draw()
 
     local px, py = player:getPosition()
-    player.animation:draw(sprites.playerSheet, px, py, nil, nil, nil, 46, 62)
+    player.animation:draw(sprites.playerSheet, px, py, nil, 1 * player.direction, 1, 46, 62)
 end
 
 function love.keypressed(key)
