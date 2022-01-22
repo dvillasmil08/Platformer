@@ -63,9 +63,9 @@ end
 function love.keypressed(key)
     -- Could change up arrow to W
     if key == 'up' then
-        local colliders = world:queryRectangleArea(player:getX() - 20, player:getY() + 20, 40, 2, {'Platform'})
+        local colliders = world:queryRectangleArea(player:getX() - 25, player:getY() + 20, 20, 2, {'Platform'})
         if #colliders > 0 then
-            player:applyLinearImpulse(0, -7000)
+            player:applyLinearImpulse(0, -2000)
         end
     end
 end
