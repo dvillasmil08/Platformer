@@ -2,6 +2,7 @@ function love.load()
     love.window.setMode(1000, 768)
 
     anim8 = require 'libraries/anim8/anim8'
+    sti = require 'libraies/Simple-Tiled-Implementation/sti'
  
     sprites = {}
     sprites.playerSheet = love.graphics.newImage('sprites/TileSheet/gameboy.png')
