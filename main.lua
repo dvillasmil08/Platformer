@@ -4,6 +4,7 @@ function love.load()
 
     player = world:newRectangleCollider(360, 100, 80, 80)
     platform = world:newRectangleCollider(250, 400,  300, 100)
+    platform:setType('static')
 end
 
 function love.update(dt)
