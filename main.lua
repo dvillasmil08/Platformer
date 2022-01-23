@@ -36,6 +36,9 @@ function love.load()
 
     platforms = {}
 
+    doorX = 0
+    doorY = 0
+
     loadMap("level1")
 end
 
@@ -49,6 +52,11 @@ function love.update(dt)
     -- If you DONT want the camera to Y position static
     -- Change bellow code to: cam:lookAt(px, py)
     cam:lookAt(px, love.graphics.getHeight()/2)
+
+    local colliders = world:queryCircleArea(doorX, doorY, 10, {'Player'})
+    if #colliders > 0 then
+        loadMap("level2")
+    end
 end
 
 function love.draw()
@@ -111,11 +119,16 @@ end
 
 function loadMap(mapName)
     destroyAll()
+    player:setPosition(300, 100)
     gameMap = sti("maps/" .. mapName .. ".lua")
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
     end
     for i, obj in pairs(gameMap.layers["Enemies"].objects) do
         spawnEnemy(obj.x, obj.y)
+    end
+    for i, obj in pairs(gameMap.layers["Door"].objects) do
+        doorX = obj.x
+        doorY = obj.y
     end
 end

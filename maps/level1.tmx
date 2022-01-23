@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="47">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="54">
  <editorsettings>
   <export target="levelOne.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="platformer" tilewidth="64" tileheight="64" tilecount="1" columns="1">
   <image source="../sprites/PNG/Tiles/platformPack_tile001.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="2" name="ramp" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="../sprites/PNG/Tiles/platformPack_tile004.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="3" name="tilesheet" tilewidth="64" tileheight="64" tilecount="98" columns="14">
+ <tileset firstgid="2" name="tilesheet" tilewidth="64" tileheight="64" tilecount="98" columns="14">
   <image source="../sprites/Tilesheet/platformPack_tilesheet.png" width="896" height="448"/>
+ </tileset>
+ <tileset firstgid="100" name="Door" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="door.png" width="64" height="64"/>
  </tileset>
  <layer id="1" name="Base" width="40" height="12">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,31,31,31,0,0,0,0,0,0,31,31,31,31,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,34,34,34,34,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,6,6,3,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,6,6,6,6,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,6,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,3,3,3,3,6,6,6,6,6,0,3,3,3,3,3,3,3,3,3,
-0,0,0,0,0,6,6,6,6,6,6,6,0,31,31,31,31,31,31,31,0,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,
-0,0,0,0,0,6,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,
-7,7,7,7,7,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,8,6,6,6,6,6,6,6,6,6,
-21,21,21,21,21,6,6,6,6,6,6,6,21,21,21,21,21,21,21,21,21,6,6,6,6,6,6,6,6,6,22,6,6,6,6,6,6,6,6,6
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,30,0,0,0,0,0,0,30,30,30,30,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,100,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,5,5,2,0,0,0,0,0,0,0,0,30,30,
+0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,5,5,5,5,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,2,2,2,2,5,5,5,5,5,0,2,2,2,2,2,2,0,0,0,
+0,0,0,0,0,5,5,5,5,5,5,5,0,30,30,30,30,30,30,30,0,5,5,5,5,5,5,5,5,5,0,5,5,5,5,5,5,0,0,0,
+0,0,0,0,0,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,5,5,5,5,5,5,0,0,0,
+6,6,6,6,6,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,7,5,5,5,5,5,5,0,0,0,
+20,20,20,20,20,5,5,5,5,5,5,5,20,20,20,20,20,20,20,20,20,5,5,5,5,5,5,5,5,5,21,5,5,5,5,5,5,0,0,0
 </data>
  </layer>
  <objectgroup id="4" name="Platform">
   <object id="1" x="320" y="384" width="448" height="384"/>
-  <object id="2" x="960" y="576"/>
   <object id="19" x="896" y="256" width="320" height="64"/>
   <object id="20" x="832" y="512" width="448" height="64"/>
   <object id="21" x="1344" y="192" width="256" height="64"/>
   <object id="22" x="1984" y="192" width="256" height="64"/>
-  <object id="27" x="768" y="640" width="576" height="128"/>
-  <object id="28" x="0" y="640" width="320" height="128"/>
-  <object id="29" x="1088" y="-128"/>
-  <object id="30" x="1088" y="-128"/>
   <object id="35" x="1344" y="448" width="256" height="320"/>
-  <object id="37" x="1920" y="384"/>
   <object id="39" x="1664" y="320" width="256" height="64"/>
   <object id="40" x="1728" y="256" width="128" height="64"/>
-  <object id="43" x="1792" y="832"/>
-  <object id="44" x="1984" y="448" width="576" height="320"/>
   <object id="45" x="1600" y="384" width="320" height="384"/>
-  <object id="46" x="1984" y="896"/>
+  <object id="50" x="1984" y="448" width="384" height="320"/>
+  <object id="51" x="2432" y="320" width="128" height="64"/>
+ </objectgroup>
+ <objectgroup id="7" name="Door">
+  <object id="53" x="2496" y="256" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="5" name="Enemies">
   <object id="31" x="1410" y="128" width="66" height="62"/>
