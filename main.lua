@@ -17,7 +17,7 @@ function love.load()
     animations.jump = anim8.newAnimation(grid('2-2',1), 1)
     animations.run = anim8.newAnimation(grid('3-4',1), 0.3)
 
-    wf = require 'libraries/windfield'
+    wf = require 'libraries/windfield/windfield'
     world = wf.newWorld(0, 800, false)
     world:setQueryDebugDrawing(true)
 
