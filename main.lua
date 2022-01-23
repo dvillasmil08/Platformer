@@ -9,13 +9,16 @@ function love.load()
 
     sprites = {}
     sprites.playerSheet = love.graphics.newImage('sprites/TileSheet/gameboy.png')
-
+    sprites.enemySheet = love.graphics.newImage('sprites/TileSheet/enemySheet.png')
+    
     local grid = anim8.newGrid(96, 96, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
+    local enemyGrid = anim8.newGrid(100, 79, sprites.enemySheet:getWidth(), sprites.enemySheet:getHeight())
 
     animations = {}
     animations.idle = anim8.newAnimation(grid('1-1',1), 1)
     animations.jump = anim8.newAnimation(grid('2-2',1), 1)
     animations.run = anim8.newAnimation(grid('3-4',1), 0.3)
+    animations.enemy = anim8.newAnimation(enemyGrid('1-2',1), 0.1)
 
     wf = require 'libraries/windfield/windfield'
     world = wf.newWorld(0, 800, false)
@@ -34,8 +37,6 @@ function love.load()
     platforms = {}
 
     loadMap()
-
-    spawnEnemy(960, 320)
 end
 
 function love.update(dt)
@@ -55,6 +56,7 @@ function love.draw()
         gameMap:drawLayer(gameMap.layers["Base"])
         world:draw()
         drawPlayer()
+        drawEnemies()
     cam:detach()
 end
 
@@ -88,5 +90,8 @@ function loadMap()
     gameMap = sti("maps/levelOne.lua")
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
+    end
+    for i, obj in pairs(gameMap.layers["Enemies"].objects) do
+        spawnEnemy(obj.x, obj.y)
     end
 end
