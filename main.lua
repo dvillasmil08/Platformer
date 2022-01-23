@@ -73,6 +73,10 @@ function love.update(dt)
         elseif currentLevel == "level2" then
             --change to level3 if more than 2 levels are available
             -- and use same elseif for multiple levels
+            loadMap("level3")
+        elseif currentLevel == "level3" then
+            --change to level4 if more levels are available
+            -- and use same elseif for multiple levels
             loadMap("level1")
         end
     end
