@@ -82,7 +82,6 @@ function love.draw()
     love.graphics.draw(sprites.background, 0 ,0)
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Base"])
-        world:draw()
         drawPlayer()
         drawEnemies()
     cam:detach()
@@ -101,14 +100,14 @@ function love.keypressed(key)
     end
 end
 
-function love.mousepressed(x, y, button)
-    if button == 1 then
-        local colliders = world:queryCircleArea(x, y, 200, {'Platform', 'Danger'})
-        for i,c in ipairs(colliders) do
-            c:destroy()
-        end
-    end
-end
+-- function love.mousepressed(x, y, button)
+--     if button == 1 then
+--         local colliders = world:queryCircleArea(x, y, 200, {'Platform', 'Danger'})
+--         for i,c in ipairs(colliders) do
+--             c:destroy()
+--         end
+--     end
+-- end
 
 function spawnPlatform(x, y, width, height)
     if width > 0 and height > 0 then
