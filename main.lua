@@ -41,8 +41,8 @@ function love.load()
     require('Player')
     require('enemy')
 
-    -- dangerZone = world:newRectangleCollider(0, 550, 800, 50, {collision_class = "Danger"})
-    -- dangerZone:setType('static')
+    dangerZone = world:newRectangleCollider(-500, 800, 5000, 50, {collision_class = "Danger"})
+    dangerZone:setType('static')
 
     platforms = {}
 
@@ -79,7 +79,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.draw(sprites.background)
+    love.graphics.draw(sprites.background, 0 ,0)
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Base"])
         world:draw()
@@ -141,8 +141,12 @@ end
 function loadMap(mapName)
     currentLevel = mapName
     destroyAll()
-    player:setPosition(400, 100)
     gameMap = sti("maps/" .. mapName .. ".lua")
+    for i, obj in pairs(gameMap.layers["Start"].objects) do
+       playerStartX = obj.x
+       playerStartY = obj.y
+    end
+    player:setPosition(playerStartX, playerStartY)
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
     end
