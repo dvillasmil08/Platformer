@@ -36,7 +36,7 @@ function love.load()
 
     platforms = {}
 
-    loadMap()
+    loadMap("level1")
 end
 
 function love.update(dt)
@@ -67,6 +67,9 @@ function love.keypressed(key)
             player:applyLinearImpulse(0, -3000)
         end
     end
+    if key == 'r' then
+        loadMap("level2")
+    end
 end
 
 function love.mousepressed(x, y, button)
@@ -86,8 +89,29 @@ function spawnPlatform(x, y, width, height)
     end
 end
 
-function loadMap()
-    gameMap = sti("maps/levelOne.lua")
+function destroyAll()
+    local i = #platforms
+    while i > -1 do
+        if platforms[i] ~= nil then
+            platforms[i]:destroy()
+        end
+        table.remove(platforms, i)
+        i = i -1
+    end
+
+    local i = #enemies
+    while i > -1 do
+        if enemies[i] ~= nil then
+            enemies[i]:destroy()
+        end
+        table.remove(enemies, i)
+        i = i -1
+    end
+end
+
+function loadMap(mapName)
+    destroyAll()
+    gameMap = sti("maps/" .. mapName .. ".lua")
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
     end
