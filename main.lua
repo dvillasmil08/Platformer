@@ -12,12 +12,14 @@ function love.load()
     sounds.music = love.audio.newSource("audio/music.mp3", "stream")
     sounds.music:setLooping(true)
     sounds.music:setVolume(0.05)
+    sounds.jump:setVolume(0.10)
 
     sounds.music:play()
 
     sprites = {}
     sprites.playerSheet = love.graphics.newImage('sprites/TileSheet/gameboy.png')
     sprites.enemySheet = love.graphics.newImage('sprites/TileSheet/enemySheet.png')
+    sprites.background = love.graphics.newImage('sprites/background.png')
     
     local grid = anim8.newGrid(96, 96, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
     local enemyGrid = anim8.newGrid(100, 79, sprites.enemySheet:getWidth(), sprites.enemySheet:getHeight())
@@ -77,6 +79,7 @@ function love.update(dt)
 end
 
 function love.draw()
+    love.graphics.draw(sprites.background)
     cam:attach()
         gameMap:drawLayer(gameMap.layers["Base"])
         world:draw()

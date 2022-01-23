@@ -3,7 +3,7 @@ enemies = {}
 function spawnEnemy(x, y)
     local enemy = world:newRectangleCollider(x, y, 70, 80, {collision_class = "Danger"})
     enemy.direction = 1
-    enemy.speed = 150
+    enemy.speed = 125
     enemy.animation = animations.enemy
     table.insert(enemies, enemy)
 end
@@ -25,6 +25,6 @@ end
 function drawEnemies()
     for i,e in ipairs(enemies) do
         local ex, ey = e:getPosition()
-        e.animation:draw(sprites.enemySheet, ex, ey, nil, e.direction, 1, 50, 50)
+        e.animation:draw(sprites.enemySheet, ex, ey, nil, e.direction, 1, 50, 45)
     end
 end
