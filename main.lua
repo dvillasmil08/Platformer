@@ -36,10 +36,13 @@ function love.load()
 
     platforms = {}
 
+
     doorX = 0
     doorY = 0
 
-    loadMap("level1")
+    currentLevel = "level1"
+
+    loadMap(currentLevel)
 end
 
 function love.update(dt)
@@ -55,7 +58,13 @@ function love.update(dt)
 
     local colliders = world:queryCircleArea(doorX, doorY, 10, {'Player'})
     if #colliders > 0 then
+        if currentLevel == "level1" then
         loadMap("level2")
+        elseif currentLevel == "level2" then
+            --change to level3 if more than 2 levels are available
+            -- and use same elseif for multiple levels
+            loadMap("level1")
+        end
     end
 end
 
@@ -118,8 +127,9 @@ function destroyAll()
 end
 
 function loadMap(mapName)
+    currentLevel = mapName
     destroyAll()
-    player:setPosition(300, 100)
+    player:setPosition(400, 100)
     gameMap = sti("maps/" .. mapName .. ".lua")
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width, obj.height)
